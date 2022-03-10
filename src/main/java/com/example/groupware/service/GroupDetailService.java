@@ -25,7 +25,7 @@ public class GroupDetailService implements UserDetailsService{
     public void joinUser(User user){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        repository.saveUser(user);
+        //repository.saveUser(user);
     }
 
     @Override

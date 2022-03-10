@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -16,6 +17,23 @@ public class LoginController{
 
     @Autowired
     private GroupDetailService service;
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginCheck(String id, String password) {
+        System.out.println("id "+ id);
+        System.out.println("password "+ password);
+        return "login";
+    }
+
+    @GetMapping("/home")
+    public String home() {
+        return "home";
+    }
 
     @GetMapping("/signUp")
     public String signUpForm() {
@@ -29,7 +47,7 @@ public class LoginController{
         return "redirect:/login";
     }
 
-    @GetMapping("/")
+    @GetMapping("/userAccess")
     public String userAccess(Model model, Authentication authentication) {
         //Authentication 객체를 통해 유저 정보를 가져올 수 있다.
         GroupDetail userDetail = (GroupDetail)authentication.getPrincipal();  //userDetail 객체를 가져옴

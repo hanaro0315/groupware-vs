@@ -3,10 +3,12 @@ package com.example.groupware.repository;
 import com.example.groupware.entity.User;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GroupRepository extends CrudRepository<User, Long>{
     
-    public void saveUser(User user);
+    //public void saveUser(User user);
 
     public User findUserByEmail(String email);
 
