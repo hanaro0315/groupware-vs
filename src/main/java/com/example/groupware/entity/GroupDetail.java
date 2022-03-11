@@ -17,7 +17,7 @@ public class GroupDetail implements UserDetails{
     public GroupDetail(User user){
         this.email = user.getEmail();
         this.password = user.getPassword();
-        this.auth = "ROLE_"+user.getRole();
+        this.auth = user.getRole();
     }
 
     //계정이 가지고 있는 권한 목록 반환

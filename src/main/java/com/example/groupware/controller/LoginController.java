@@ -25,8 +25,12 @@ public class LoginController{
 
     @PostMapping("/login")
     public String loginCheck(String id, String password) {
-        System.out.println("id "+ id);
-        System.out.println("password "+ password);
+        try {
+
+        }
+        catch (Exception e){
+
+        }
         return "login";
     }
 
@@ -41,8 +45,14 @@ public class LoginController{
     }
 
     @PostMapping("/signUp")
-    public String signUp(User user) {
+    public String signUp(String email, String password, String id) {
+
+        User user = new User();
         user.setRole("USER");
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setId(id);
+
         service.joinUser(user);
         return "redirect:/login";
     }

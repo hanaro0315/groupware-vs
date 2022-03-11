@@ -12,6 +12,8 @@ public interface GroupRepository extends CrudRepository<User, Long>{
 
     public User findUserByEmail(String email);
 
+    public User findUserById(String id);
+
 	// @Query("select t from Member t where name=:name and age < :age")
 	// List<Member> findByNameAndAgeLessThanSQL(@Param("name") String name, @Param("age") int age);
 }

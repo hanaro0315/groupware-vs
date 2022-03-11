@@ -7,11 +7,16 @@ import com.example.groupware.entity.User;
 import com.example.groupware.repository.GroupRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //db에 접근 가능한 메소드 사용.
 @Service
@@ -25,7 +30,7 @@ public class GroupDetailService implements UserDetailsService{
     public void joinUser(User user){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        //repository.saveUser(user);
+        repository.save(user);
     }
 
     @Override

@@ -10,7 +10,8 @@ import javax.persistence.Table;
 public class User {
     
     @Id
-    private Long id;
+    @Column(name="member_id")
+    private String id;
 
     @Column
     private String email;
@@ -20,6 +21,14 @@ public class User {
 
     @Column
     private String role;
+
+    public void setId(String id){
+        this.id = id;
+    }
+
+    public String getId(){
+        return this.id;
+    }
 
     public void setEmail(String email){
         this.email = email;
@@ -38,7 +47,7 @@ public class User {
     }
 
     public void setRole(String role){
-        this.role = role;
+        this.role = "ROLE_"+role;
     }
 
     public String getRole(){
