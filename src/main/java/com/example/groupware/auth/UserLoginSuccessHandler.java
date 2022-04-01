@@ -23,5 +23,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         for(int i = 0; i< authList.size(); i++) {
             System.out.print(authList.get(i).getAuthority() + " ");
         }
+
+        response.sendRedirect("test");
     }
 }

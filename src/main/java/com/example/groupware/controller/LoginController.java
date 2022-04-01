@@ -65,4 +65,15 @@ public class LoginController{
         service.joinUser(user);
         return "redirect:/login";
     }
+
+    @GetMapping("test")
+    public String test(Model model, Authentication authentication)
+    {
+        GroupDetail groupDetail = (GroupDetail) authentication.getPrincipal();
+
+        model.addAttribute("id", "id : "+groupDetail.getUsername());
+        model.addAttribute("auth", "auth : "+authentication.getAuthorities());
+
+        return "test";
+    }
 }

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="board/layout/basic">
+<head>
+<meta charset="UTF-8">
+<title>Security OK?</title>
+</head>
+<body>
+
+<h1>Hello Security</h1>
+<p th:text="${id}"></p>
+<p th:text="${auth}"></p>
+
+<button type="submit">Admin</button>
+<button type="submit">User</button>
+<button type="submit">Logout</button>
+
+</body>
+</html>
