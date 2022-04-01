@@ -33,9 +33,9 @@ public class GroupDetailService implements UserDetailsService{
         repository.save(user);
     }
 
+    //loadUserbyUsername : DB에서 값을 가져온다.
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
         User user = repository.findUserByEmail(email);
         return new GroupDetail(user);
     }

@@ -23,20 +23,29 @@ public class LoginController{
         return "login";
     }
 
-    @PostMapping("/login")
-    public String loginCheck(String id, String password) {
-        try {
-
-        }
-        catch (Exception e){
-
-        }
-        return "login";
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
     }
 
     @GetMapping("/home")
     public String home() {
         return "home";
+    }
+
+    @GetMapping("/address")
+    public String address() {
+        return "address";
+    }
+
+    @GetMapping("/address_private")
+    public String address_private() {
+        return "address_private";
+    }
+
+    @GetMapping("/index")
+    public String index() {
+        return "index";
     }
 
     @GetMapping("/signUp")
@@ -56,13 +65,4 @@ public class LoginController{
         service.joinUser(user);
         return "redirect:/login";
     }
-
-    @GetMapping("/userAccess")
-    public String userAccess(Model model, Authentication authentication) {
-        //Authentication 객체를 통해 유저 정보를 가져올 수 있다.
-        GroupDetail userDetail = (GroupDetail)authentication.getPrincipal();  //userDetail 객체를 가져옴
-        model.addAttribute("info", userDetail.getUsername());      //유저 이메일
-    	return "user_access";
-    }
-
 }
