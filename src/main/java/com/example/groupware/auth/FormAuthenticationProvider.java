@@ -28,7 +28,13 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
         String email = authentication.getName();
         String password = (String) authentication.getCredentials();
 
+        System.out.println("from getname : "+ email);
+        System.out.println("from password : "+ password);
+
         GroupDetail groupDetail = (GroupDetail) groupDetailService.loadUserByUsername(email);
+
+        System.out.println("from groupDetail : "+ groupDetail.getUsername());
+        System.out.println("getPassword : "+ groupDetail.getPassword());
 
         if(groupDetail == null || !email.equals(groupDetail.getUsername()) ||
                 !passwordEncoder.matches(password, groupDetail.getPassword())){

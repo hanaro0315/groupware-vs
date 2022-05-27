@@ -36,8 +36,11 @@ public class GroupDetailService implements UserDetailsService{
     //loadUserbyUsername : DB에서 값을 가져온다.
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = repository.findUserByEmail(email);
-        return new GroupDetail(user);
+        System.out.println("email"+email);
+        User user = repository.findById(email);
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole()));
+        return new GroupDetail(user, authorities);
     }
     
 }

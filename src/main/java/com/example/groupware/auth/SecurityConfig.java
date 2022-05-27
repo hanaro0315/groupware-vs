@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -36,15 +37,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private LoginFailHandler loginFailHandler;
 
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
+
     //규칙 설정
     @Override
     protected void configure(HttpSecurity http) throws Exception{
+        http.csrf().disable();
          http.authorizeRequests()
-         .antMatchers("/index").hasRole("USER")
-         .antMatchers("/home").hasRole("USER")
+         .antMatchers("/user").hasRole("USER")
+                 .antMatchers("/admin2").hasRole("ADMIN")
+                 .accessDecisionManager(accessDecisionManager())
          .antMatchers("/signUp").permitAll()
-         .antMatchers("/address_private").hasRole("ADMIN")
-                .accessDecisionManager(accessDecisionManager())
          .and()
           .csrf().disable()
                  .formLogin()
@@ -54,7 +58,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .passwordParameter("pw")
                     .failureUrl("/signUp")
                     .successHandler(userLoginSuccessHandler)
-                    .failureHandler(loginFailHandler);
+                    .failureHandler(loginFailHandler)
+                 .and()
+                 .exceptionHandling()
+                 .accessDeniedPage("/access_denied")
+                 .and()
+                 .logout()
+                 .logoutUrl("/dologout")
+                 .logoutSuccessHandler(logoutSuccessHandler);
     }
 
     //정적자원에 대해선 Security 설정을 적용하지 않음.
